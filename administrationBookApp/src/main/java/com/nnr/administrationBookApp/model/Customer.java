@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -40,6 +41,7 @@ public class Customer implements Serializable{
 	private String job;
 	
 	@NotNull
+	@Column(unique = true)
 	private String email;
 	
 	@NotNull
