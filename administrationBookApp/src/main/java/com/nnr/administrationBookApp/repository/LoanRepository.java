@@ -15,11 +15,11 @@ public interface LoanRepository extends JpaRepository<Loan, Long>{
 	
 	public List<Loan> findByEndDateBefore(Date maxEndDate);
     
-    @Query("SELECT lo "
-         + "FROM Loan lo "
-         + "INNER JOIN lo.pk.customer c "
-         + "WHERE UPPER(c.email) = UPPER(?1) "
-         + "   AND lo.status = ?2 ")
-    public List<Loan> getAllOpenLoansOfThisCustomer(String email, LoanStatus status);
+//    @Query("SELECT lo "
+//         + "FROM Loan lo "
+//         + "INNER JOIN lo.pk.customer c "
+//         + "WHERE UPPER(c.email) = UPPER(?1) "
+//         + "   AND lo.status = ?2 ")
+//    public List<Loan> getAllOpenLoansOfThisCustomer(String email, LoanStatus status);
 
 }
