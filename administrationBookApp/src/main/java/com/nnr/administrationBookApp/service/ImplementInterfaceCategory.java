@@ -92,7 +92,7 @@ public class ImplementInterfaceCategory implements InterfaceCategory{
 	@Override
 	public Category updateCategory(Long categoryId, Category category) {
 		Optional<Category> cat = categoryRepository.findById(categoryId);
-		if(!cat.isPresent()) {
+		if(cat.isPresent()) {
 			cat.get().setId(category.getId());
 			cat.get().setCode(category.getCode());
 			cat.get().setLabel(category.getLabel());
