@@ -5,9 +5,9 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.nnr.administrationBookApp.exception.AdministrationBookException;
+import com.nnr.administrationBookApp.model.Book;
 import com.nnr.administrationBookApp.model.Category;
 import com.nnr.administrationBookApp.repository.CategoryRepository;
 
@@ -55,4 +55,56 @@ public class ImplementInterfaceCategory implements InterfaceCategory{
 		throw new AdministrationBookException("pas de categorie avec l'identifiant"+ categoryId);
 		}
 	}
+
+	@Override
+	public List<Book> getBookByCategoryId(Long categoryId) {
+		Optional<Category> category = categoryRepository.findById(categoryId);
+		if(category.isPresent()) {
+			List<Book> book= category.get().getBook();
+			return book;
+		}else {
+			log.error("pas de categorie disponible avec l'identifiant"+" "+categoryId);
+			throw new AdministrationBookException("pas de categorie disponible avec l'identifiant"+" "+categoryId);
+		}
+		
+	}
+
+	@Override
+	public Category getOnCategory(Long categoryId) {
+		Optional<Category> category = categoryRepository.findById(categoryId);
+		if(category.isPresent()) {
+			return category.get();
+		}
+		log.error("pas de categorie disponible avec l'identifiant"+" "+categoryId);
+		throw new AdministrationBookException("pas de categorie disponible avec l'identifiant"+" "+categoryId);
+	}
+
+	@Override
+	public List<Category> getCategoryByLabel(String label) {
+		List<Category> cate = categoryRepository.findByLabelLikeIgnoreCase(label);
+		if(!cate.isEmpty()) {
+			return cate;
+		}
+		log.error("pas de categorie disponible avec le label"+" "+label);
+		throw new AdministrationBookException("pas de categorie disponible avec le label"+" "+label);
+	}
+
+	@Override
+	public Category updateCategory(Long categoryId, Category category) {
+		Optional<Category> cat = categoryRepository.findById(categoryId);
+		if(!cat.isPresent()) {
+			cat.get().setId(category.getId());
+			cat.get().setCode(category.getCode());
+			cat.get().setLabel(category.getLabel());
+			cat.get().setBook(category.getBook());
+			Category cate = categoryRepository.save(cat.get());
+			
+			return cate;
+		}else {
+			log.error("pas de categorie disponible avec l'identifiant"+" "+categoryId);
+			throw new AdministrationBookException("pas de categorie disponible avec l'identifiant"+" "+categoryId);
+		}
+	}
+	
+	
 }

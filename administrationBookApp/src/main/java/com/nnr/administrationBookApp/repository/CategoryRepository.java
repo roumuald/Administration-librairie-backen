@@ -10,6 +10,6 @@ import com.nnr.administrationBookApp.model.Category;
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long>{
 	
-	public List<Category> findByLabel(String label);
+	public List<Category> findByLabelLikeIgnoreCase(String label);
 
 }

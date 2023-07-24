@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nnr.administrationBookApp.model.Book;
 import com.nnr.administrationBookApp.model.Category;
 import com.nnr.administrationBookApp.service.InterfaceCategory;
 
@@ -36,6 +37,27 @@ public class CategoryController {
 	@RequestMapping(method = RequestMethod.DELETE, path = "/deleteCategorie/{categoryId}")
 	public void deleteCategory(@PathVariable Long categoryId) {
 		interfaceCategory.deleteCategory(categoryId);
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, path = "/bookByCategory/{categoryId}")
+	public List<Book> getBookByCategoryId(@PathVariable Long categoryId){
+		return interfaceCategory.getBookByCategoryId(categoryId);
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, path = "/getOneCategory/{categoryId}")
+	public Category getOnCategory(@PathVariable Long categoryId) {
+		return interfaceCategory.getOnCategory(categoryId);
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, path = "/allCategoryByLabel/{label}")
+	public List<Category> getCategoryByLabel(@PathVariable String label){
+		return interfaceCategory.getCategoryByLabel(label);
+		
+	}
+	
+	@RequestMapping(method = RequestMethod.PUT, path = "/updateCategory/{categoryId}")
+	public Category updateCategory(@PathVariable Long categoryId, @RequestBody Category category) {
+		return interfaceCategory.updateCategory(categoryId, category);
 	}
 
 }
