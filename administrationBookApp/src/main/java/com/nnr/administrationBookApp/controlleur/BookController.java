@@ -37,5 +37,15 @@ public class BookController {
 	public List<Book> getAllBookByTitle(@PathVariable String title){
 		return interfaceBook.getAllBookByTitle(title);
 	}
+	
+	@RequestMapping(method = RequestMethod.DELETE, path ="/deleteBook/{bookId}")
+	public void deleteBook(@PathVariable Long bookId) {
+		interfaceBook.deleteBook(bookId);
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, path ="/updateBook/{bookId}")
+	public Book updateBook(@RequestBody Book newBook, @PathVariable Long bookId) {
+		return interfaceBook.updateBook(newBook, bookId);
+	}
 
 }

@@ -64,4 +64,38 @@ public class ImplementInterfaceBook implements InterfaceBook{
 		
 	}
 
+	@Override
+	public void deleteBook(Long bookId) {
+		Optional<Book> book = bookRepository.findById(bookId);
+		if(book.isPresent()) {
+			bookRepository.delete(book.get());
+		}else {
+			log.error("Aucun livre disponible a la base de donnees avec l'identifiant"+""+bookId);
+			throw new AdministrationBookException("Aucun livre disponible a la base de donnees avec l'identifiant"+""+bookId);
+		}
+		
+	}
+
+	@Override
+	public Book updateBook(Book newBook, Long bookId) {
+		Optional<Book> book = bookRepository.findById(bookId);
+		if(book.isPresent()) {
+			book.get().setAuthor(newBook.getAuthor());
+			book.get().setCategory(newBook.getCategory());
+			book.get().setCreatedDate(newBook.getCreatedDate());
+			book.get().setId(newBook.getId());
+			book.get().setLoan(newBook.getLoan());
+			book.get().setStock(newBook.getStock());
+			book.get().setTitle(newBook.getTitle());
+			book.get().setTotalExamp(newBook.getTotalExamp());
+			
+			Book finalBook = bookRepository.save(book.get());
+			
+			return finalBook;
+		}else {
+			log.error("Aucun livre disponible a la base de donnees avec l'identifiant"+""+bookId);
+			throw new AdministrationBookException("Aucun livre disponible a la base de donnees avec l'identifiant"+""+bookId);
+		}
+	}
+
 }

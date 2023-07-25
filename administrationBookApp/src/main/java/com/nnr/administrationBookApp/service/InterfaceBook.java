@@ -11,16 +11,16 @@ public interface InterfaceBook {
 	public List<Book> getAllBook();
 	
 	public List<Book> getAllBookByTitle(String title);
+	
+	public void deleteBook(Long bookId);
+	
+	public Book updateBook(Book book, Long bookId);
     
 //    public Book updateBook(Book book);
 //    
 //    public void deleteBook(Integer bookId);
 //    
 //    public List<Book> findBooksByTitleOrPartTitle(String title);
-//    
-//    public Book findBookByIsbn(String isbn);
-//    
-//    public boolean checkIfIdexists(Integer id);
 //    
 //    public List<Book> getBooksByCategory(String codeCategory);
 
