@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -51,6 +53,7 @@ public class Book implements Serializable{
 	private Category category;
 	
 	@OneToMany(mappedBy = "book")
+	@JsonIgnore
 	private List<Loan> loan = new ArrayList<>();
 	
 	

@@ -7,12 +7,13 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -27,7 +28,6 @@ public class Customer implements Serializable{
 	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JoinColumn(name = "customerId")
 	private Long id;
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
@@ -48,6 +48,7 @@ public class Customer implements Serializable{
 	private String adress;
 
 	@OneToMany(mappedBy = "customer")
+	@JsonIgnore
 	private List<Loan> loan = new ArrayList<>();
 	
 }
