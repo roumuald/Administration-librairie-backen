@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.nnr.administrationBookApp.enumerate.LoanStatus;
 import com.nnr.administrationBookApp.exception.AdministrationBookException;
 import com.nnr.administrationBookApp.model.Book;
 import com.nnr.administrationBookApp.model.Customer;
@@ -65,7 +66,15 @@ public class ImplementInterfaceLoan implements InterfaceLoan{
 	public void closeLoan(Long bookId, Long customerId) {
 		
 	}
-	
-	
 
+	@Override
+	public List<Loan> findLoansByEmailAndStatus(String email, LoanStatus status) {
+		List<Loan> loan = loanRepository.getAllOpenLoansOfThisCustomer(email, status);
+		if(loan.isEmpty()) {
+			log.error("Aucun pret disponible en base de donnees");
+			throw new AdministrationBookException("Aucun pret disponible en base de donnees");
+		}else {
+			return loan;
+		}
+	}	
 }

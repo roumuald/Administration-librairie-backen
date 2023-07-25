@@ -36,5 +36,10 @@ public class LoanController {
 	public List<Loan> getAllLoan(){
 		return interfaceLoan.getAllLoan();
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, path = "/allOpenLoansOfThisCustomer/{email}/{status}")
+	public List<Loan> findLoansByEmailAndStatus(@PathVariable String email, @PathVariable LoanStatus status) {
+		return interfaceLoan.findLoansByEmailAndStatus(email, status);
+	}
 
 }
