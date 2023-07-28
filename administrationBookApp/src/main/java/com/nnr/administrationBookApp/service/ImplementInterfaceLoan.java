@@ -64,8 +64,30 @@ public class ImplementInterfaceLoan implements InterfaceLoan{
 
 	@Override
 	public void closeLoan(Long bookId, Long customerId) {
-		
+	    Optional<Book> book = bookRepository.findById(bookId);
+	    Optional<Customer> customer = customerRepository.findById(customerId);
+	    Loan loan = loanRepository.findLoanByCustomerIdBookIdAndStatus(bookId, customerId, LoanStatus.OPEN);
+	    if (customer.isPresent() && book.isPresent()) {
+	    	loan.setBook(book.get());
+	    	loan.setCustomer(customer.get());
+	    	loan.setStatus(LoanStatus.CLOSE);
+	        loanRepository.save(loan);
+	    }
 	}
+	
+	@Override
+	public void openLoan(Long bookId, Long customerId) {
+		 Optional<Book> book = bookRepository.findById(bookId);
+		    Optional<Customer> customer = customerRepository.findById(customerId);
+		    Loan loan = loanRepository.findLoanByCustomerIdBookIdAndStatus(bookId, customerId, LoanStatus.CLOSE);
+		    if (customer.isPresent() && book.isPresent()) {
+		    	loan.setBook(book.get());
+		    	loan.setCustomer(customer.get());
+		    	loan.setStatus(LoanStatus.OPEN);
+		        loanRepository.save(loan);
+		    }
+		
+	}	
 
 	@Override
 	public List<Loan> findLoansByEmailAndStatus(String email, LoanStatus status) {
@@ -76,5 +98,5 @@ public class ImplementInterfaceLoan implements InterfaceLoan{
 		}else {
 			return loan;
 		}
-	}	
+	}
 }

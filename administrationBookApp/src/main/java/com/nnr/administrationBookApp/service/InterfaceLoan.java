@@ -13,6 +13,10 @@ public interface InterfaceLoan {
 	
 	public void closeLoan(Long bookId, Long customerId);
 	
+	public void openLoan(Long bookId, Long customerId);
+	
 	public List<Loan> findLoansByEmailAndStatus(String email, LoanStatus status);
+	
+	
 
 }

@@ -41,5 +41,15 @@ public class LoanController {
 	public List<Loan> findLoansByEmailAndStatus(@PathVariable String email, @PathVariable LoanStatus status) {
 		return interfaceLoan.findLoansByEmailAndStatus(email, status);
 	}
+	
+	@RequestMapping(method = RequestMethod.POST, path = "/closeLoan/{bookId}/{customerId}")
+	public void closeLoan(@PathVariable Long bookId, @PathVariable Long customerId) {
+		interfaceLoan.closeLoan(bookId, customerId);
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, path = "/openLoan//{bookId}/{customerId}")
+	public void openLoan(@PathVariable Long bookId, @PathVariable Long customerId) {
+		interfaceLoan.openLoan(bookId, customerId);
+	}
 
 }
