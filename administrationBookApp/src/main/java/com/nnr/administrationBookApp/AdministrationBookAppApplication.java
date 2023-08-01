@@ -11,5 +11,4 @@ public class AdministrationBookAppApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AdministrationBookAppApplication.class, args);
 	}
-
 }

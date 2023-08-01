@@ -15,13 +15,4 @@ public interface InterfaceBook {
 	public void deleteBook(Long bookId);
 	
 	public Book updateBook(Book book, Long bookId);
-    
-//    public Book updateBook(Book book);
-//    
-//    public void deleteBook(Integer bookId);
-//    
-//    public List<Book> findBooksByTitleOrPartTitle(String title);
-//    
-//    public List<Book> getBooksByCategory(String codeCategory);
-
 }

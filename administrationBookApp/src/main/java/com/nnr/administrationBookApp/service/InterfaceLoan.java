@@ -3,6 +3,7 @@ package com.nnr.administrationBookApp.service;
 import java.util.List;
 
 import com.nnr.administrationBookApp.enumerate.LoanStatus;
+import com.nnr.administrationBookApp.model.Customer;
 import com.nnr.administrationBookApp.model.Loan;
 
 public interface InterfaceLoan {
@@ -17,6 +18,6 @@ public interface InterfaceLoan {
 	
 	public List<Loan> findLoansByEmailAndStatus(String email, LoanStatus status);
 	
+	public Customer getCustomerByLoanId(Long loanId);
 	
-
 }

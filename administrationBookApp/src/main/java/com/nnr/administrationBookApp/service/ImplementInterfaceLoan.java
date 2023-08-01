@@ -77,7 +77,7 @@ public class ImplementInterfaceLoan implements InterfaceLoan{
 	
 	@Override
 	public void openLoan(Long bookId, Long customerId) {
-		 Optional<Book> book = bookRepository.findById(bookId);
+		 	Optional<Book> book = bookRepository.findById(bookId);
 		    Optional<Customer> customer = customerRepository.findById(customerId);
 		    Loan loan = loanRepository.findLoanByCustomerIdBookIdAndStatus(bookId, customerId, LoanStatus.CLOSE);
 		    if (customer.isPresent() && book.isPresent()) {
@@ -86,7 +86,6 @@ public class ImplementInterfaceLoan implements InterfaceLoan{
 		    	loan.setStatus(LoanStatus.OPEN);
 		        loanRepository.save(loan);
 		    }
-		
 	}	
 
 	@Override
@@ -99,4 +98,16 @@ public class ImplementInterfaceLoan implements InterfaceLoan{
 			return loan;
 		}
 	}
+
+	@Override
+	public Customer getCustomerByLoanId(Long loanId) {
+		Optional<Loan> loan = loanRepository.findById(loanId);
+		if(loan.isPresent()) {
+			Customer customer = loan.get().getCustomer();
+			return customer;
+		}
+		log.error("pas de pret disponible avec l'identifiant"+" "+ loanId);
+		throw new AdministrationBookException("pas de pret disponible avec l'identifiant"+" "+ loanId);
+	}
+	
 }
